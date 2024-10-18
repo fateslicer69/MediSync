@@ -11,7 +11,7 @@ import ManageAppointment from './AdminCom/manageAppoint';
 import CheckPatient from './doctorComp/checkPatient';
 import Diagnose from './doctorComp/diagnose';
 import MedicCost from './doctorComp/medicCost';
-import AddPatient from './AdminCom/addPatient'; // AddPatient import
+import AddPatient from './AdminCom/AddingPatient'; // AddPatient import
 
 const App: React.FC = () => {
     const [userRole, setUserRole] = useState<string | null>(null); // State to track user role
@@ -40,4 +40,5 @@ const App: React.FC = () => {
 };
 
 export default App;
+
 

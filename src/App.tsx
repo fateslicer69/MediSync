@@ -1,5 +1,7 @@
+// App.tsx
+
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Use HashRouter
 import Navbar from './components/Navbar/Navbar';
 import LoginPage from './pages/login';
 import SignUpPage from './pages/signUp';
@@ -11,25 +13,24 @@ import ManageAppointment from './AdminCom/manageAppoint';
 import CheckPatient from './doctorComp/checkPatient';
 import Diagnose from './doctorComp/diagnose';
 import MedicCost from './doctorComp/medicCost';
-import AddPatient from './AdminCom/AddingPatient'; // AddPatient import
 
 const App: React.FC = () => {
     const [userRole, setUserRole] = useState<string | null>(null); // State to track user role
 
     return (
-        <Router>
+        <Router> {/* Wrap everything in HashRouter */}
             <Navbar />
             <div className="container mx-auto p-4">
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signin" element={<SignUpPage />} />
-                    <Route path="/" element={<PromptPage setUserRole={setUserRole} />} /> {/* Default to PromptPage */}
+                    <Route path="/" element={<PromptPage setUserRole={setUserRole} />} /> {/* Pass setUserRole */}
                     <Route path="/add-doctor" element={<AddDoctor />} />
-                    <Route path="/add-patient" element={<AddPatient />} />
-                    <Route path="/manage-appointment" element={<ManageAppointment />} /> 
+                    <Route path="/add-patient" element={<AddPatient doctorId={doctorId} existingPatients={existingPatients} />} />
+                    <Route path="/manage-appointment" element={<ManageAppointment />} />
                     <Route path="/check-patients" element={<CheckPatient />} />
                     <Route path="/diagnose" element={<Diagnose />} />
-                    <Route path="/medic-cost" element={<MedicCost />} /> 
+                    <Route path="/medic-cost" element={<MedicCost />} />
                 </Routes>
                 {/* Conditional rendering for Admin or Doctor dashboards */}
                 {userRole === 'admin' && <AdminHero />}
@@ -40,5 +41,6 @@ const App: React.FC = () => {
 };
 
 export default App;
+
 
 
